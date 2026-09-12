@@ -1,0 +1,153 @@
+# backend/agents/analysis_agent.py
+
+import uuid
+from datetime import datetime
+
+
+class AnalysisAgent:
+    """
+    Enriches raw alerts with:
+    - Severity classification
+    - MITRE ATT&CK mapping
+    - Alert ID and timestamp
+    - LLM-generated or template explanation
+    - Feature-level ML explainability (for ML Anomaly alerts)
+    """
+
+    def __init__(self, llm_analyzer=None):
+        self.llm_analyzer = llm_analyzer
+
+        self.severity_mapping = {
+            "Brute Force Attack":    "HIGH",
+            "Multiple IP Login":     "HIGH",
+            "Suspicious Login Time": "MEDIUM",
+            "ML Anomaly Detected":   "MEDIUM",
+            "Credential Stuffing":   "HIGH",
+            "Slow Brute Force":      "HIGH",
+        }
+
+        self.mitre_mapping = {
+            "Brute Force Attack": {
+                "technique_id":   "T1110.001",
+                "technique_name": "Brute Force: Password Guessing",
+                "tactic":         "Credential Access",
+                "url":            "https://attack.mitre.org/techniques/T1110/001/"
+            },
+            "Slow Brute Force": {
+                "technique_id":   "T1110.003",
+                "technique_name": "Brute Force: Password Spraying",
+                "tactic":         "Credential Access",
+                "url":            "https://attack.mitre.org/techniques/T1110/003/"
+            },
+            "Credential Stuffing": {
+                "technique_id":   "T1110.004",
+                "technique_name": "Brute Force: Credential Stuffing",
+                "tactic":         "Credential Access",
+                "url":            "https://attack.mitre.org/techniques/T1110/004/"
+            },
+            "Multiple IP Login": {
+                "technique_id":   "T1078",
+                "technique_name": "Valid Accounts",
+                "tactic":         "Defense Evasion / Persistence",
+                "url":            "https://attack.mitre.org/techniques/T1078/"
+            },
+            "Suspicious Login Time": {
+                "technique_id":   "T1078.001",
+                "technique_name": "Valid Accounts: Default Accounts",
+                "tactic":         "Persistence",
+                "url":            "https://attack.mitre.org/techniques/T1078/001/"
+            },
+            "ML Anomaly Detected": {
+                "technique_id":   "T1190",
+                "technique_name": "Exploit Public-Facing Application",
+                "tactic":         "Initial Access",
+                "url":            "https://attack.mitre.org/techniques/T1190/"
+            },
+        }
+
+    def evaluate_alert(self, alert):
+        alert = alert.copy()  
+        alert_type = alert.get("type", "Unknown Threat")
+        severity   = self.severity_mapping.get(alert_type, "LOW")
+
+        # Upgrade ML anomaly to HIGH if model confidence is High
+        if alert_type == "ML Anomaly Detected":
+            if alert.get("confidence") == "High":
+                severity = "HIGH"
+
+        alert["severity"]    = severity
+        alert["alert_id"]    = str(uuid.uuid4())[:8].upper()
+        alert["detected_at"] = alert.get(
+            "timestamp",
+            datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        )
+
+        # MITRE ATT&CK mapping
+        mitre = self.mitre_mapping.get(alert_type)
+        if mitre:
+            alert["mitre"] = mitre
+
+        # Get feature explanation for ML alerts
+        feature_explanation = alert.pop("feature_explanation", None)
+
+        # Generate explanation - LLM if available, template if not
+        if self.llm_analyzer:
+            alert["explanation"] = self.llm_analyzer.generate_explanation(
+                alert, feature_explanation
+            )
+        else:
+            alert["explanation"] = self._template_explanation(alert)
+
+        # Attach feature explanation to alert for dashboard transparency
+        if feature_explanation:
+            alert["feature_explanation"] = {
+                "summary":       feature_explanation.get("summary", ""),
+                "score_context": feature_explanation.get("score_context", ""),
+                "contributions": feature_explanation.get("contributions", []),
+                "anomalous_count": feature_explanation.get("anomalous_count", 0),
+            }
+
+        return alert
+
+    def _template_explanation(self, alert):
+        """Template fallback when LLM is not available."""
+        t    = alert.get("type",        "Unknown")
+        user = alert.get("user",        "unknown")
+        ip   = alert.get("ip",          "unknown")
+        desc = alert.get("description", "")
+
+        templates = {
+            "Brute Force Attack": (
+                f"HIGH: Repeated failed logins from {ip} indicate an automated "
+                f"brute force attack targeting '{user}'. "
+                f"IP has been flagged for blocking."
+            ),
+            "Slow Brute Force": (
+                f"HIGH: IP {ip} is making deliberate slow-paced login attempts "
+                f"against '{user}', staying below rapid-detection thresholds. "
+                f"This is a known evasion technique. Details: {desc}"
+            ),
+            "Multiple IP Login": (
+                f"HIGH: '{user}' authenticated from multiple IPs in rapid succession. "
+                f"Possible stolen credentials or active session hijacking. "
+                f"Details: {desc}"
+            ),
+            "Suspicious Login Time": (
+                f"MEDIUM: '{user}' logged in from {ip} during off-hours. "
+                f"May be legitimate but warrants admin review. "
+                f"Details: {desc}"
+            ),
+            "ML Anomaly Detected": (
+                f"ML DETECTION: Isolation Forest flagged unusual behaviour for "
+                f"'{user}' from {ip}. Score: {alert.get('anomaly_score', 'N/A')} "
+                f"(confidence: {alert.get('confidence', 'N/A')}). "
+                f"Review recommended."
+            ),
+            "Credential Stuffing": (
+                f"HIGH: {ip} attempted logins across multiple accounts. "
+                f"Consistent with automated credential stuffing. Details: {desc}"
+            ),
+        }
+        return templates.get(
+            t, f"{alert.get('severity','LOW')} alert for '{user}' from {ip}. {desc}"
+        )
