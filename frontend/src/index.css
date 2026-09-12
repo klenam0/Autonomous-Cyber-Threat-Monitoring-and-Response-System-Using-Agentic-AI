@@ -1,0 +1,329 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    color-scheme: dark;
+    --bg-page: #080d1a;
+    --bg-sidebar: #0b1120;
+    --bg-card: #0f1629;
+    --bg-elevated: #111827;
+    --border: #1e2a3d;
+    --border-light: #2a3850;
+    --text-primary: #ffffff;
+    --text-secondary: #94a3b8;
+    --text-muted: #475569;
+    --accent: #06b6d4;
+    --accent-dim: rgba(34, 211, 238, 0.12);
+    --active: #22c55e;
+    --badge-high-bg: rgba(249, 115, 22, 0.18);
+    --badge-high-text: #fb923c;
+    --badge-medium-bg: rgba(245, 158, 11, 0.18);
+    --badge-medium-text: #fbbf24;
+    --badge-low-bg: rgba(59, 130, 246, 0.18);
+    --badge-low-text: #60a5fa;
+    --badge-critical-bg: rgba(239, 68, 68, 0.18);
+    --badge-critical-text: #f87171;
+  }
+
+  html.light {
+    color-scheme: light;
+    --bg-page: #f0f4f8;
+    --bg-sidebar: #f8fafc;
+    --bg-card: #ffffff;
+    --bg-elevated: #ffffff;
+    --border: #e2e8f0;
+    --border-light: #cbd5e1;
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --accent: #0891b2;
+    --accent-dim: #ecfeff;
+    --active: #16a34a;
+    --badge-high-bg: #ffedd5;
+    --badge-high-text: #c2410c;
+    --badge-medium-bg: #fef3c7;
+    --badge-medium-text: #b45309;
+    --badge-low-bg: #dbeafe;
+    --badge-low-text: #1d4ed8;
+    --badge-critical-bg: #fee2e2;
+    --badge-critical-text: #b91c1c;
+  }
+
+  html,
+  body,
+  #root {
+    min-height: 100%;
+  }
+
+  body {
+    margin: 0;
+    background: var(--bg-page);
+    color: var(--text-primary);
+  }
+
+  .app-shell {
+    min-height: 100%;
+    background: var(--bg-page);
+    color: var(--text-primary);
+    --app-bg: var(--bg-page);
+    --app-surface: var(--bg-card);
+    --app-surface-strong: var(--bg-elevated);
+    --app-border: var(--border);
+    --app-text: var(--text-primary);
+    --app-text-strong: var(--text-primary);
+    --app-muted: var(--text-secondary);
+    --app-muted-strong: var(--text-muted);
+    --app-accent-soft: var(--accent-dim);
+  }
+
+  html.light .app-shell {
+    color-scheme: light;
+  }
+
+  html.light .bg-\[\#080d1a\] {
+    background-color: var(--bg-page) !important;
+  }
+
+  html.light .bg-\[\#0b1120\] {
+    background-color: var(--bg-sidebar) !important;
+  }
+
+  html.light .bg-\[\#0f1629\] {
+    background-color: var(--bg-card) !important;
+  }
+
+  html.light .bg-\[\#111827\] {
+    background-color: var(--bg-elevated) !important;
+  }
+
+  html.light .bg-\[\#1e2a3d\] {
+    background-color: var(--border) !important;
+  }
+
+  html.light .border-\[\#1e2a3d\] {
+    border-color: var(--border) !important;
+  }
+
+  html.light .divide-\[\#1e2a3d\] > :not\(\[hidden\]\) ~ :not\(\[hidden\]\) {
+    border-color: var(--border) !important;
+  }
+
+  html.light .text-slate-200,
+  html.light .text-slate-300 {
+    color: var(--text-primary) !important;
+  }
+
+  html.light .text-slate-400,
+  html.light .text-slate-500 {
+    color: var(--text-secondary) !important;
+  }
+
+  html.light .text-slate-600,
+  html.light .text-slate-700 {
+    color: var(--text-muted) !important;
+  }
+
+  html.light .placeholder-slate-700::placeholder {
+    color: var(--text-muted) !important;
+  }
+
+  html.light .text-cyan-400,
+  html.light .hover\:text-cyan-300:hover,
+  html.light .hover\:text-cyan-400:hover {
+    color: var(--accent) !important;
+  }
+
+  html.light .bg-cyan-500\/10,
+  html.light .bg-cyan-500\/15 {
+    background-color: var(--accent-dim) !important;
+  }
+
+  html.light .bg-cyan-500\/20 {
+    background-color: #cffafe !important;
+  }
+
+  html.light .border-cyan-500\/20 {
+    border-color: #a5f3fc !important;
+  }
+
+  html.light .border-cyan-500\/30 {
+    border-color: #67e8f9 !important;
+  }
+
+  html.light .text-green-400,
+  html.light .text-green-700,
+  html.light .hover\:text-green-400:hover {
+    color: #15803d !important;
+  }
+
+  html.light .bg-green-500\/10,
+  html.light .bg-green-500\/15,
+  html.light .bg-green-500\/20 {
+    background-color: #f0fdf4 !important;
+  }
+
+  html.light .border-green-500\/20 {
+    border-color: #bbf7d0 !important;
+  }
+
+  html.light .border-green-500\/30 {
+    border-color: #86efac !important;
+  }
+
+  html.light .text-orange-400,
+  html.light .hover\:text-orange-300:hover {
+    color: var(--badge-high-text) !important;
+  }
+
+  html.light .bg-orange-500\/15,
+  html.light .bg-orange-500\/20 {
+    background-color: var(--badge-high-bg) !important;
+  }
+
+  html.light .border-orange-500\/30 {
+    border-color: #fed7aa !important;
+  }
+
+  html.light .text-amber-400 {
+    color: var(--badge-medium-text) !important;
+  }
+
+  html.light .bg-amber-500\/15,
+  html.light .bg-amber-500\/20 {
+    background-color: var(--badge-medium-bg) !important;
+  }
+
+  html.light .border-amber-500\/30 {
+    border-color: #fde68a !important;
+  }
+
+  html.light .text-blue-400 {
+    color: var(--badge-low-text) !important;
+  }
+
+  html.light .bg-blue-500\/15,
+  html.light .bg-blue-500\/20 {
+    background-color: var(--badge-low-bg) !important;
+  }
+
+  html.light .border-blue-500\/30 {
+    border-color: #bfdbfe !important;
+  }
+
+  html.light .text-red-400 {
+    color: var(--badge-critical-text) !important;
+  }
+
+  html.light .bg-red-500\/15,
+  html.light .bg-red-500\/20 {
+    background-color: var(--badge-critical-bg) !important;
+  }
+
+  html.light .border-red-500\/30 {
+    border-color: #fecaca !important;
+  }
+
+  html.light .text-purple-400 {
+    color: #7c3aed !important;
+  }
+
+  html.light .bg-purple-500\/20 {
+    background-color: #f3e8ff !important;
+  }
+
+  html.light .border-purple-500\/30 {
+    border-color: #ddd6fe !important;
+  }
+
+  html.light .text-pink-400 {
+    color: #db2777 !important;
+  }
+
+  html.light .bg-pink-500\/20 {
+    background-color: #fce7f3 !important;
+  }
+
+  html.light .border-pink-500\/30 {
+    border-color: #fbcfe8 !important;
+  }
+
+  html.light .bg-slate-700:not(.text-white),
+  html.light .bg-slate-800,
+  html.light .bg-slate-900 {
+    background-color: #e2e8f0 !important;
+  }
+
+  html.light .bg-slate-700.text-white {
+    background-color: var(--accent-dim) !important;
+    color: #0e7490 !important;
+  }
+
+  html.light .hover\:bg-white\/\[0\.02\]:hover,
+  html.light .hover\:bg-white\/\[0\.03\]:hover,
+  html.light .hover\:bg-white\/\[0\.05\]:hover,
+  html.light .hover\:bg-black\/5:hover {
+    background-color: rgba(15, 23, 42, 0.04) !important;
+  }
+
+  .ui-page-title {
+    @apply text-4xl font-bold leading-tight tracking-tight;
+  }
+
+  .ui-page-title {
+    @apply text-3xl font-bold leading-tight tracking-tight;
+  }
+
+  .ui-section-title {
+    @apply text-2xl font-semibold leading-tight tracking-tight;
+  }
+
+  .ui-card-title {
+    @apply text-xl font-semibold leading-snug;
+  }
+
+  .ui-subheading {
+    @apply text-lg font-semibold leading-snug;
+  }
+
+  .ui-label {
+    @apply text-sm font-medium leading-6;
+  }
+
+  .ui-body {
+    @apply text-sm font-normal leading-7;
+  }
+
+  .ui-body-lg {
+    @apply text-base font-normal leading-7;
+  }
+
+  .ui-caption {
+    @apply text-xs font-normal leading-5 text-[color:var(--text-secondary)];
+  }
+
+  .ui-kicker {
+    @apply text-xs font-medium uppercase tracking-[0.16em] text-[color:var(--text-secondary)];
+  }
+
+  .ui-table-head {
+    @apply text-xs font-semibold uppercase tracking-[0.14em] text-[color:var(--text-muted)];
+  }
+
+  .ui-nav-label {
+    @apply text-sm font-medium leading-6;
+  }
+
+  .ui-metric-value {
+    @apply text-xl font-semibold leading-none;
+  }
+
+  .ui-metric-label {
+    @apply text-xs font-medium leading-5 text-[color:var(--text-secondary)];
+  }
+
+  .ui-chip {
+    @apply text-xs font-medium leading-5;
+  }
+}
