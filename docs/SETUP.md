@@ -11,7 +11,7 @@ A pre-trained model is distributed as a [GitHub Release asset](../../releases) r
 
 ### Getting the pre-trained model
 
-The trained Isolation Forest (`backend/data/model.pkl`, ~470MB) is distributed as a [GitHub Release asset](../../releases) rather than committed to the repository.
+The trained Isolation Forest (`backend/data/model.pkl`, ~470MB) is distributed as a [GitHub Release asset](https://github.com/klenam0/Autonomous-Cyber-Threat-Monitoring-and-Response-System-Using-Agentic-AI/releases/tag/v1.0.0-model) rather than committed to the repository.
 This model was trained and pickled under `scikit-learn==1.8.0`. Loading it with a substantially different scikit-learn version may produce warnings or, in rare cases, fail to unpickle - install from `requirements.txt` exactly, or retrain locally if you need a different version.
 
 **Download it and place it at `backend/data/model.pkl` before running `main.py`.** If this file is absent, the system will not error out - it silently falls back to training a weaker synthetic 5-feature model instead of loading the RBA-trained 10-feature one, which will not reproduce the reported precision/recall/F1 figures.
