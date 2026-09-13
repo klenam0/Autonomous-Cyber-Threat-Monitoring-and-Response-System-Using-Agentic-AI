@@ -53,15 +53,17 @@ This project explores a **hybrid** answer: deterministic rules for known attack 
 
 ## Screenshots
 
-> Add your own dashboard screenshots here before publishing - see [`docs/PUBLICATION_CHECKLIST.md`](docs/PUBLICATION_CHECKLIST.md) for exactly which views to capture.
+| Dashboard Overview                           | Live Alert Feed                                  |
+| -------------------------------------------- | ------------------------------------------------ |
+| ![Dashboard](docs/screenshots/dashboard.png) | ![Live Alerts](docs/screenshots/live-alerts.png) |
 
-| Dashboard Overview               | Live Alert Feed                    |
-| -------------------------------- | ---------------------------------- |
-| `docs/screenshots/dashboard.png` | `docs/screenshots/live-alerts.png` |
+| Alert Detail (ML Explainability)                   | MITRE ATT&CK Mapping                                 |
+| -------------------------------------------------- | ---------------------------------------------------- |
+| ![Alert Detail](docs/screenshots/alert-detail.png) | ![MITRE Mapping](docs/screenshots/mitre-mapping.png) |
 
-| Alert Detail (ML Explainability)    | MITRE ATT&CK Mapping                 |
-| ----------------------------------- | ------------------------------------ |
-| `docs/screenshots/alert-detail.png` | `docs/screenshots/mitre-mapping.png` |
+| Detection Engine — Hybrid Architecture Overview                       | Detection Engine — All 6 Detectors                                     |
+| --------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| ![Detection Engine Overview](docs/screenshots/detection-engine-1.png) | ![Detection Engine Detectors](docs/screenshots/detection-engine-2.png) |
 
 ## Architecture
 
