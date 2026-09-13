@@ -1,24 +1,14 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite it as below."
-title: "Autonomous Cyber Threat Monitoring and Response System Using Agentic AI"
 authors:
-  - family-names: "Deegbe"
-    given-names: "Cephas Dotse Klenam"
-date-released: "2026-01-01"
-version: "1.0.0"
-repository-code: "https://github.com/klenam0/Autonomous-Cyber-Threat-Monitoring-and-Response-System-Using-Agentic-AI"
-license: MIT
-type: software
-keywords:
-  - intrusion-detection
-  - anomaly-detection
-  - isolation-forest
-  - agentic-ai
-  - mitre-attack
-  - risk-based-authentication
-abstract: >
-  A multi-agent intrusion detection system combining rule-based logic,
-  Isolation Forest machine learning, and LLM-based alert enrichment,
-  applied to risk-based authentication threat detection. Developed as a
-  final-year BSc Computer Science research project at the University of
-  Ghana.
+  - family-names: "Lisa"
+    given-names: "Mona"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+  - family-names: "Bot"
+    given-names: "Hew"
+    orcid: "https://orcid.org/0000-0000-0000-0000"
+title: "My Research Software"
+version: 2.0.4
+doi: 10.5281/zenodo.1234
+date-released: 2017-12-18
+url: "https://github.com/github-linguist/linguist"
