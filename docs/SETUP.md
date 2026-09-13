@@ -7,7 +7,7 @@
 - [Ollama](https://ollama.com/) installed locally, with the `phi3:mini` model pulled
 - (Optional, for retraining) the [RBA Dataset](https://github.com/vs-uulm/2021-RBA-Dataset) CSV
 
-A pre-trained model is distributed as a [GitHub Release asset](../../releases) rather than committed directly (it's ~470MB, driven mainly by the full IP/user label-encoder vocabularies from 630,000 training rows). Download it and place it at `backend/data/model.pkl` before running the pipeline - see "Getting the pre-trained model" below.
+A pre-trained model is distributed as a [GitHub Release asset](https://github.com/klenam0/Autonomous-Cyber-Threat-Monitoring-and-Response-System-Using-Agentic-AI/releases/tag/v1.0.0-model) rather than committed directly (it's ~470MB, driven mainly by the full IP/user label-encoder vocabularies from 630,000 training rows). Download it and place it at `backend/data/model.pkl` before running the pipeline - see "Getting the pre-trained model" below.
 
 ### Getting the pre-trained model
 
