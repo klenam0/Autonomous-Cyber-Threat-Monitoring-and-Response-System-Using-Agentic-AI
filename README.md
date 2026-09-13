@@ -221,11 +221,11 @@ If you reference this work, please cite it as:
 
 ```bibtex
 @misc{agentic-cyber-ids-2026,
-  author = {Klenam},
+  author = {Deegbe Cephas Dotse Klenam},
   title  = {Autonomous Cyber Threat Monitoring and Response System Using Agentic AI},
   year   = {2026},
   institution = {University of Ghana, Department of Computer Science},
-  howpublished = {\url{https://github.com/klenam0/Autonomous-Cyber-Threat-Monitoring-and-Response-System-Using-Agentic-AI.git}}
+  howpublished = {\url{https://github.com/klenam0/Autonomous-Cyber-Threat-Monitoring-and-Response-System-Using-Agentic-AI}}
 }
 ```
 
