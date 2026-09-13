@@ -23,6 +23,7 @@ A multi-agent intrusion detection system that combines rule-based detection, uns
   - [ML Model Performance](#ml-model-performance)
   - [Tech Stack](#tech-stack)
   - [Project Structure](#project-structure)
+  - [Project Structure](#project-structure-1)
   - [Getting Started](#getting-started)
   - [Dataset \& Attribution](#dataset--attribution)
   - [Roadmap](#roadmap)
@@ -136,14 +137,18 @@ Evaluated on a held-out RBA Dataset split (real-world login telemetry, see [Data
 
 ## Project Structure
 
+## Project Structure
+
 ```
 .
 ├── backend/
-│   ├── main.py                  # Entry point - batch and live modes
+│   ├── main.py                  # Entry point — batch and live modes
 │   ├── api.py                   # Flask REST API + LLM enrichment service
 │   ├── live_simulator.py        # Continuous event generator for live-mode demos
+│   ├── requirements.txt
+│   ├── .env.example
 │   ├── agents/
-│   │   ├── monitoring_agent.py  # Orchestrator - batch + live streaming
+│   │   ├── monitoring_agent.py  # Orchestrator — batch + live streaming
 │   │   ├── detection_agent.py   # 6 detectors (5 rule-based + 1 ML)
 │   │   ├── analysis_agent.py    # Severity, MITRE mapping, LLM explanation
 │   │   └── response_agent.py    # Simulated block / notify / email
@@ -155,8 +160,10 @@ Evaluated on a held-out RBA Dataset split (real-world login telemetry, see [Data
 │       ├── alert_manager.py     # FileLock-protected JSON persistence
 │       ├── llm_analyzer.py      # phi3:mini via Ollama, async enrichment
 │       ├── log_generator.py     # Synthetic log + training data generator
+│       ├── log_parser.py        # Raw log text → structured JSON
 │       └── email_alerter.py     # Gmail SMTP alerting
 ├── frontend/
+│   ├── .env.example
 │   └── src/
 │       ├── App.js
 │       ├── components/          # Sidebar, Navbar
@@ -164,7 +171,12 @@ Evaluated on a held-out RBA Dataset split (real-world login telemetry, see [Data
 ├── docs/
 │   ├── ARCHITECTURE.md
 │   ├── SETUP.md
-│   └── DECISIONS.md
+│   ├── DECISIONS.md
+│   └── screenshots/
+├── CITATION.cff
+├── CONTRIBUTING.md
+├── LICENSE
+├── .gitignore
 └── README.md
 ```
 
